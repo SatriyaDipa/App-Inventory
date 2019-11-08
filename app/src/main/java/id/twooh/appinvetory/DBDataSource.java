@@ -158,4 +158,11 @@ class DBDataSource {
         cursor.close();
         return daftarBarang;
     }
+
+    // delete barang sesuai ID
+    public void deleteBarang(long id)
+    {
+        String strFilter = "_id=" + id;
+        database.delete(DBHelper.TABLE_NAME, strFilter, null);
+    }
 }

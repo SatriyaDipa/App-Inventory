@@ -22,6 +22,7 @@ public class ViewData extends ListActivity implements OnItemLongClickListener {
     private ArrayList<Barang> values;
     private Button editButton;
     private Button delButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,10 +74,25 @@ public class ViewData extends ListActivity implements OnItemLongClickListener {
                     }
                 }
         );
+
+        //apabila tombol delete di klik
+        delButton.setOnClickListener(
+                new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v) {
+
+                        // Delete barang
+                        dataSource.deleteBarang(b.getId());
+                        dialog.dismiss();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                }
+        );
         return true;
     }
 
-    //method untuk edit data
     public void switchToEdit(long id)
     {
         Barang b = dataSource.getBarang(id);
@@ -91,17 +107,18 @@ public class ViewData extends ListActivity implements OnItemLongClickListener {
         startActivity(i);
     }
 
-    //method yang dipanggil ketika edit data selesai
     public void finale()
     {
         ViewData.this.finish();
         dataSource.close();
     }
+
     @Override
     protected void onResume() {
         dataSource.open();
         super.onResume();
     }
+
     @Override
     protected void onPause() {
         dataSource.close();

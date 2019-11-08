@@ -94,4 +94,28 @@ class DBDataSource {
         //kembalikan sebagai objek barang
         return barang;
     }
+
+    //mengambil semua data barang
+    public ArrayList<Barang> getAllBarang() {
+        ArrayList<Barang> daftarBarang = new ArrayList<Barang>();
+
+        // select all SQL query
+        Cursor cursor = database.query(DBHelper.TABLE_NAME,
+                allColumns, null, null, null, null, null);
+
+        // pindah ke data paling pertama
+        cursor.moveToFirst();
+
+        // jika masih ada data, masukkan data barang ke
+        // daftar barang
+        while (!cursor.isAfterLast()) {
+            Barang barang = cursorToBarang(cursor);
+            daftarBarang.add(barang);
+            cursor.moveToNext();
+        }
+
+        // Make sure to close the cursor
+        cursor.close();
+        return daftarBarang;
+    }
 }

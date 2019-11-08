@@ -12,15 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateData">
+        <activity android:name=".CreateData"
+            android:label="@string/title_activity_main">
 
         </activity>
-        <activity android:name=".Menu">
+        <activity android:name=".Menu"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ViewData"
+            android:label="@string/title_activity_main">
+
         </activity>
     </application>
 
